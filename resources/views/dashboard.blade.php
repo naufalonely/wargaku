@@ -233,39 +233,39 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-    const geojsonPath = '{{ url('/geojson/jawa_barat.geojson') }}';
+    // const geojsonPath = '{{ url('/geojson/jawa_barat.geojson') }}';
 
-    fetch(geojsonPath)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(data => {
-                const geojsonLayer = L.geoJSON(data, {
-                    style: function (feature) {
-                        return {
-                            color: "",
-                            weight: 3,
-                            opacity: 0.8,
-                            fillColor: "transparent",
-                            fillOpacity: 0.2
-                        };
-                    },
-                    onEachFeature: function(feature, layer) {
-                        if (feature.properties && feature.properties.name) {
-                            layer.bindPopup(feature.properties.name);
-                        }
-                    }
-                }).addTo(map);
+    // fetch(geojsonPath)
+    //         .then(response => {
+    //             if (!response.ok) {
+    //                 throw new Error('Network response was not ok ' + response.statusText);
+    //             }
+    //             return response.json();
+    //         })
+    //         .then(data => {
+    //             const geojsonLayer = L.geoJSON(data, {
+    //                 style: function (feature) {
+    //                     return {
+    //                         color: "",
+    //                         weight: 3,
+    //                         opacity: 0.8,
+    //                         fillColor: "transparent",
+    //                         fillOpacity: 0.2
+    //                     };
+    //                 },
+    //                 onEachFeature: function(feature, layer) {
+    //                     if (feature.properties && feature.properties.name) {
+    //                         layer.bindPopup(feature.properties.name);
+    //                     }
+    //                 }
+    //             }).addTo(map);
 
-                map.fitBounds(geojsonLayer.getBounds());
+    //             map.fitBounds(geojsonLayer.getBounds());
 
-            })
-            .catch(error => {
-                console.error('There has been a problem with your fetch operation:', error);
-            });
+    //         })
+    //         .catch(error => {
+    //             console.error('There has been a problem with your fetch operation:', error);
+    //         });
 </script>
 
 <script>
