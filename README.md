@@ -83,7 +83,3 @@ Aplikasi sekarang dapat diakses di `http://127.0.0.1:8000`.
 ## Kontribusi
 
 Kami sangat menyambut kontribusi Anda. Jika Anda menemukan bug atau memiliki ide fitur, silakan buat _issue_ atau kirimkan _pull request_.
-
-## Lisensi
-
-Proyek ini dilisensikan di bawah Lisensi MIT.
