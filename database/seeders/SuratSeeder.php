@@ -54,7 +54,7 @@ class SuratSeeder extends Seeder
 
         for ($i = 0; $i < 30; $i++) {
             Surat::create([
-                'nomor_surat' => 'DUKCAPIL/' . date('Ymd') . '/' . str_pad($i + 1, 3, '0', STR_PAD_LEFT),
+                'nomor_surat' => 'SK/' . date('Ymd') . '/' . str_pad($i + 1, 3, '0', STR_PAD_LEFT),
                 'penduduk_id' => $faker->randomElement($pendudukIds),
                 'pegawai_id' => $faker->randomElement($pegawaiIds),
                 'jenis_surat' => $faker->randomElement($jenisSuratOptions),

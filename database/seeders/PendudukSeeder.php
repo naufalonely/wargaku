@@ -18,11 +18,23 @@ class PendudukSeeder extends Seeder
     {
         $faker = Faker::create('id_ID');
 
+        $kabupatenKotaJabar = [
+            'Kabupaten Bandung', 'Kabupaten Bandung Barat', 'Kabupaten Bekasi',
+            'Kabupaten Bogor', 'Kabupaten Ciamis', 'Kabupaten Cianjur',
+            'Kabupaten Cirebon', 'Kabupaten Garut', 'Kabupaten Indramayu',
+            'Kabupaten Karawang', 'Kabupaten Kuningan', 'Kabupaten Majalengka',
+            'Kabupaten Pangandaran', 'Kabupaten Purwakarta', 'Kabupaten Subang',
+            'Kabupaten Sukabumi', 'Kabupaten Sumedang', 'Kabupaten Tasikmalaya',
+            'Kota Bandung', 'Kota Banjar', 'Kota Bekasi', 'Kota Bogor',
+            'Kota Cimahi', 'Kota Cirebon', 'Kota Depok', 'Kota Sukabumi',
+            'Kota Tasikmalaya'
+        ];
+
         Penduduk::create([
-            'nik' => '3273010101010001',
-            'nama' => 'Budi Santoso',
+            'nik' => '3273010101010010',
+            'nama' => 'Deez Nuts',
             'tempat_lahir' => 'Bandung',
-            'tanggal_lahir' => '1990-01-01',
+            'tanggal_lahir' => '1990-01-02',
             'jenis_kelamin' => 'L',
             'alamat' => 'Jl. Merdeka No. 10',
             'rt' => '001',
@@ -35,18 +47,18 @@ class PendudukSeeder extends Seeder
             'status' => 'Aktif',
         ]);
 
-        for ($i = 0; $i < 15; $i++) {
+        for ($i = 0; $i < 30; $i++) {
             $gender = $faker->randomElement(['L', 'P']);
             $pekerjaan = $faker->randomElement(['Pegawai Swasta', 'Wiraswasta', 'Mahasiswa', 'Pelajar', 'Ibu Rumah Tangga', 'Buruh', 'Petani']);
             $statusPerkawinan = $faker->randomElement(['Belum Kawin', 'Kawin']);
 
             Penduduk::create([
-                'nik' => $faker->unique()->numerify('################'), // 16 digit angka unik
+                'nik' => $faker->unique()->numerify('################'),
                 'nama' => $faker->name($gender == 'L' ? 'male' : 'female'),
-                'tempat_lahir' => $faker->city,
+                'tempat_lahir' => $faker->randomElement($kabupatenKotaJabar),
                 'tanggal_lahir' => $faker->dateTimeBetween('-50 years', '-18 years')->format('Y-m-d'),
                 'jenis_kelamin' => $gender,
-                'alamat' => $faker->address,
+                'alamat' => $faker->streetAddress . ', ' . $faker->randomElement($kabupatenKotaJabar),
                 'rt' => $faker->numerify('00#'),
                 'rw' => $faker->numerify('00#'),
                 'agama' => $faker->randomElement(['Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha']),

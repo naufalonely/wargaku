@@ -159,7 +159,7 @@
                         <div class="col-md-6">
                             <label for="no_telepon" class="form-label">No. Telepon</label>
                             <input type="text" class="form-control @error('no_telepon') is-invalid @enderror"
-                                   id="no_telepon" name="no_telepon" value="{{ old('no_telepon') }}">
+                                   id="no_telepon" name="no_telepon" value="{{ old('no_telepon') }}" maxlength="12">
                             @error('no_telepon')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

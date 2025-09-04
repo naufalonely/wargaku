@@ -42,7 +42,7 @@ class PelayananSeeder extends Seeder
 
         for ($i = 0; $i < 20; $i++) {
             PelayananDukcapil::create([
-                'nomor_permohonan' => 'DUK/' . date('Ymd') . '/' . str_pad($i + 1, 3, '0', STR_PAD_LEFT),
+                'nomor_permohonan' => 'DUKCAPIL/' . date('Ymd') . '/' . str_pad($i + 1, 3, '0', STR_PAD_LEFT),
                 'penduduk_id' => $faker->randomElement($pendudukIds),
                 'pegawai_id' => $faker->randomElement($pegawaiIds),
                 'jenis_pelayanan' => $faker->randomElement($jenisPelayananOptions),
