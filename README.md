@@ -1,4 +1,4 @@
-# Sistem Informasi Administrasi Desa
+# Sistem Informasi Kependudukan
 
 Aplikasi ini adalah sistem informasi berbasis web yang dikembangkan dengan framework Laravel untuk membantu administrasi desa dalam mengelola data kependudukan, surat-menyurat, dan pelayanan publik secara digital.
 
@@ -33,7 +33,7 @@ Aplikasi ini dibangun menggunakan teknologi berikut:
 
 Pastikan sistem Anda memenuhi persyaratan berikut untuk menjalankan aplikasi:
 
--   PHP >= 8.1
+-   PHP >= 8.2
 -   MySQL / MariaDB
 -   Composer
 -   Node.js & npm (untuk aset frontend, opsional jika tidak ada perubahan pada aset)
