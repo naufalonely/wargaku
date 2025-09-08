@@ -26,14 +26,5 @@ class PegawaiSeeder extends Seeder
             'jabatan' => 'Staff Pelayanan',
             'level' => 'staff',
         ]);
-
-        Pegawai::create([
-            'nip' => '10122264',
-            'nama' => 'Atmin Ori',
-            'email' => 'atmin@simduk.com',
-            'password' => Hash::make('atmin123'),
-            'jabatan' => 'Administrator Sistem',
-            'level' => 'admin',
-        ]);
     }
 }

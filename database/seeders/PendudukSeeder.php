@@ -32,9 +32,9 @@ class PendudukSeeder extends Seeder
 
         Penduduk::create([
             'nik' => '3273010101010010',
-            'nama' => 'Deez Nuts',
+            'nama' => 'Jason Susanto',
             'tempat_lahir' => 'Bandung',
-            'tanggal_lahir' => '1990-01-02',
+            'tanggal_lahir' => '1990-01-01',
             'jenis_kelamin' => 'L',
             'alamat' => 'Jl. Merdeka No. 10',
             'rt' => '001',

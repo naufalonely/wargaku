@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Data Surat')
+@section('title', 'Dokumen Surat')
 
 @section('content')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
