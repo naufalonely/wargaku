@@ -4,14 +4,14 @@ Aplikasi ini adalah sistem informasi berbasis web yang dikembangkan dengan frame
 
 ## Fitur Utama
 
--   **Dasbor Interaktif**: Menampilkan ringkasan statistik penting seperti total penduduk, jumlah surat, dan pelayanan terbaru secara _real-time_.
+-   **Dashboard Interaktif**: Menampilkan ringkasan statistik penting seperti total penduduk, jumlah surat, dan pelayanan terbaru secara _real-time_.
 -   **Visualisasi Data Geografis**: Menggunakan Leaflet.js dan data GeoJSON untuk memvisualisasikan data demografi penduduk per kabupaten/kota di Jawa Barat, termasuk:
     -   Jumlah total penduduk.
     -   Distribusi penduduk berdasarkan jenis kelamin, agama, pekerjaan, kesehatan, pendidikan, dan industri.
 -   **Manajemen Data Penduduk**: Mengelola data warga desa, termasuk NIK, nama, tempat/tanggal lahir, jenis kelamin, alamat, dan status.
 -   **Manajemen Dokumen**: Mencatat dan melacak pembuatan surat-surat administrasi.
 -   **Manajemen Pelayanan**: Mengelola permohonan pelayanan dari warga.
--   **Manajemen Pegawai**: Mendata informasi pegawai desa.
+-   **Manajemen Data Pegawai**: Mendata informasi pegawai desa.
 
 ## Teknologi yang Digunakan
 
