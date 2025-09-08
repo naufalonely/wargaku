@@ -42,14 +42,14 @@ Pastikan sistem Anda memenuhi persyaratan berikut untuk menjalankan aplikasi:
 
 Ikuti langkah-langkah berikut untuk menginstal dan menjalankan aplikasi secara lokal:
 
-1.  **Klon repositori:**
+1.  **Clone repositori:**
 
     ```bash
     git clone https://github.com/naufalonely/wargaku.git
     cd nama-proyek
     ```
 
-2.  **Instal dependensi Composer:**
+2.  **Install dependensi Composer:**
 
     ```bash
     composer install
