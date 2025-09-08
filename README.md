@@ -1,17 +1,17 @@
-# Sistem Informasi Administrasi Desa
+# Sistem Informasi Kependudukan
 
 Aplikasi ini adalah sistem informasi berbasis web yang dikembangkan dengan framework Laravel untuk membantu administrasi desa dalam mengelola data kependudukan, surat-menyurat, dan pelayanan publik secara digital.
 
 ## Fitur Utama
 
--   **Dasbor Interaktif**: Menampilkan ringkasan statistik penting seperti total penduduk, jumlah surat, dan pelayanan terbaru secara _real-time_.
+-   **Dashboard Interaktif**: Menampilkan ringkasan statistik penting seperti total penduduk, jumlah surat, dan pelayanan terbaru secara _real-time_.
 -   **Visualisasi Data Geografis**: Menggunakan Leaflet.js dan data GeoJSON untuk memvisualisasikan data demografi penduduk per kabupaten/kota di Jawa Barat, termasuk:
     -   Jumlah total penduduk.
     -   Distribusi penduduk berdasarkan jenis kelamin, agama, pekerjaan, kesehatan, pendidikan, dan industri.
--   **Manajemen Data Penduduk**: Mengelola data warga desa, termasuk NIK, nama, tempat/tanggal lahir, jenis kelamin, alamat, dan status.
+-   **Manajemen Data Penduduk**: Mengelola data penduduk, termasuk NIK, nama, tempat/tanggal lahir, jenis kelamin, alamat, dan status.
 -   **Manajemen Dokumen**: Mencatat dan melacak pembuatan surat-surat administrasi.
--   **Manajemen Pelayanan**: Mengelola permohonan pelayanan dari warga.
--   **Manajemen Pegawai**: Mendata informasi pegawai desa.
+-   **Manajemen Pelayanan**: Mengelola permohonan pelayanan dari penduduk.
+-   **Manajemen Data Pegawai**: Mendata informasi pegawai dukcapil.
 
 ## Teknologi yang Digunakan
 
@@ -33,7 +33,7 @@ Aplikasi ini dibangun menggunakan teknologi berikut:
 
 Pastikan sistem Anda memenuhi persyaratan berikut untuk menjalankan aplikasi:
 
--   PHP >= 8.1
+-   PHP >= 8.2
 -   MySQL / MariaDB
 -   Composer
 -   Node.js & npm (untuk aset frontend, opsional jika tidak ada perubahan pada aset)
@@ -42,14 +42,14 @@ Pastikan sistem Anda memenuhi persyaratan berikut untuk menjalankan aplikasi:
 
 Ikuti langkah-langkah berikut untuk menginstal dan menjalankan aplikasi secara lokal:
 
-1.  **Klon repositori:**
+1.  **Clone repositori:**
 
     ```bash
-    git clone [https://github.com/nama-pengguna/nama-proyek.git](https://github.com/nama-pengguna/nama-proyek.git)
+    git clone https://github.com/naufalonely/wargaku.git
     cd nama-proyek
     ```
 
-2.  **Instal dependensi Composer:**
+2.  **Install dependensi Composer:**
 
     ```bash
     composer install
