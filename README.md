@@ -45,7 +45,7 @@ Ikuti langkah-langkah berikut untuk menginstal dan menjalankan aplikasi secara l
 1.  **Klon repositori:**
 
     ```bash
-    git clone [https://github.com/nama-pengguna/nama-proyek.git](https://github.com/nama-pengguna/nama-proyek.git)
+    git clone https://github.com/naufalonely/wargaku.git
     cd nama-proyek
     ```
 
