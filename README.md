@@ -8,10 +8,10 @@ Aplikasi ini adalah sistem informasi berbasis web yang dikembangkan dengan frame
 -   **Visualisasi Data Geografis**: Menggunakan Leaflet.js dan data GeoJSON untuk memvisualisasikan data demografi penduduk per kabupaten/kota di Jawa Barat, termasuk:
     -   Jumlah total penduduk.
     -   Distribusi penduduk berdasarkan jenis kelamin, agama, pekerjaan, kesehatan, pendidikan, dan industri.
--   **Manajemen Data Penduduk**: Mengelola data warga desa, termasuk NIK, nama, tempat/tanggal lahir, jenis kelamin, alamat, dan status.
+-   **Manajemen Data Penduduk**: Mengelola data penduduk, termasuk NIK, nama, tempat/tanggal lahir, jenis kelamin, alamat, dan status.
 -   **Manajemen Dokumen**: Mencatat dan melacak pembuatan surat-surat administrasi.
--   **Manajemen Pelayanan**: Mengelola permohonan pelayanan dari warga.
--   **Manajemen Data Pegawai**: Mendata informasi pegawai desa.
+-   **Manajemen Pelayanan**: Mengelola permohonan pelayanan dari penduduk.
+-   **Manajemen Data Pegawai**: Mendata informasi pegawai dukcapil.
 
 ## Teknologi yang Digunakan
 
