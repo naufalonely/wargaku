@@ -72,6 +72,17 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+
+                        <div class="col-md-6">
+                            <label for="is_active" class="form-label">Status</label>
+                            <select class="form-select @error('is_active') is-invalid @enderror" id="is_active" name="is_active">
+                                <option value="1" {{ old('is_active', $pegawai->is_active) == 1 ? 'selected' : '' }}>Aktif</option>
+                                <option value="0" {{ old('is_active', $pegawai->is_active) == 0 ? 'selected' : '' }}>Nonaktif</option>
+                            </select>
+                            @error('is_active')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
                     </div>
 
                     <div class="row mb-3">

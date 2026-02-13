@@ -6,9 +6,11 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Data Pegawai</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
-        <a href="{{ route('pegawai.create') }}" class="btn btn-primary">
-            <i class="fas fa-plus me-1"></i> Tambah Pegawai
-        </a>
+        @if(auth('pegawai')->check() && auth('pegawai')->user()->level === 'admin')
+            <a href="{{ route('pegawai.create') }}" class="btn btn-primary">
+                <i class="fas fa-plus me-1"></i> Tambah Pegawai
+            </a>
+        @endif
     </div>
 </div>
 
@@ -64,17 +66,19 @@
                                 <a href="{{ route('pegawai.show', $pegawai) }}" class="btn btn-info">
                                     <i class="fas fa-eye"></i>
                                 </a>
-                                <a href="{{ route('pegawai.edit', $pegawai) }}" class="btn btn-warning">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <form method="POST" action="{{ route('pegawai.destroy', $pegawai) }}"
-                                      onsubmit="return confirm('Yakin ingin menghapus data ini?')" style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
+                                @if(auth('pegawai')->check() && auth('pegawai')->user()->level === 'admin')
+                                    <a href="{{ route('pegawai.edit', $pegawai) }}" class="btn btn-warning">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <form method="POST" action="{{ route('pegawai.destroy', $pegawai) }}"
+                                          onsubmit="return confirm('Yakin ingin menghapus data ini?')" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                @endif
                             </div>
                         </td>
                     </tr>

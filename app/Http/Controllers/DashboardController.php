@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Penduduk;
 use App\Models\Surat;
 use App\Models\PelayananDukcapil;
@@ -22,6 +23,17 @@ class DashboardController extends Controller
             'pelayananTerbaru' => PelayananDukcapil::with(['penduduk', 'pegawai'])->latest()->take(5)->get(),
         ];
 
-        return view('dashboard', compact('data'));
+        $statistik = \App\Models\Penduduk::select(
+        'kabupaten_kota',
+        DB::raw('COUNT(*) as total_penduduk'),
+        DB::raw('SUM(CASE WHEN jenis_kelamin="L" THEN 1 ELSE 0 END) as laki_laki'),
+        DB::raw('SUM(CASE WHEN jenis_kelamin="P" THEN 1 ELSE 0 END) as perempuan')
+        )
+        ->where('status', 'Aktif')
+        ->groupBy('kabupaten_kota')
+        ->get();
+
+
+        return view('dashboard', compact('data', 'statistik'));
     }
 }

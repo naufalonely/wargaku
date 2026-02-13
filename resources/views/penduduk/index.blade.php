@@ -69,6 +69,7 @@
                                 <a href="{{ route('penduduk.edit', $penduduk) }}" class="btn btn-warning">
                                     <i class="fas fa-edit"></i>
                                 </a>
+                                @if(auth('pegawai')->check() && auth('pegawai')->user()->level === 'admin')
                                 <form method="POST" action="{{ route('penduduk.destroy', $penduduk) }}"
                                       onsubmit="return confirm('Yakin ingin menghapus data ini?')" style="display: inline;">
                                     @csrf
@@ -77,6 +78,7 @@
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </form>
+                                @endif
                             </div>
                         </td>
                     </tr>

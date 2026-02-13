@@ -74,12 +74,12 @@
                             </div>
                         </form>
 
-                        <div class="text-center mt-4">
+                        {{-- <div class="text-center mt-4">
                             <small class="text-muted">
                                 Demo: 198501012010011001 / admin123<br>
                                 198502022010012002 / staff123
                             </small>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

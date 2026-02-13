@@ -41,14 +41,24 @@
                     </div>
 
                     <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label for="tempat_lahir" class="form-label">Tempat Lahir <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control @error('tempat_lahir') is-invalid @enderror"
-                                   id="tempat_lahir" name="tempat_lahir" value="{{ old('tempat_lahir', $penduduk->tempat_lahir) }}" required>
-                            @error('tempat_lahir')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+                            <div class="col-md-6">
+                                <label for="tempat_lahir" class="form-label">Tempat Lahir <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <select class="form-select @error('tempat_lahir_type') is-invalid @enderror" id="tempat_lahir_type" name="tempat_lahir_type" style="max-width: 140px;">
+                                        <option value="">Pilih</option>
+                                        <option value="Kota" {{ old('tempat_lahir_type', $penduduk->tempat_lahir_type) == 'Kota' ? 'selected' : '' }}>Kota</option>
+                                        <option value="Kabupaten" {{ old('tempat_lahir_type', $penduduk->tempat_lahir_type) == 'Kabupaten' ? 'selected' : '' }}>Kabupaten</option>
+                                    </select>
+                                    <input type="text" class="form-control @error('tempat_lahir') is-invalid @enderror"
+                                           id="tempat_lahir" name="tempat_lahir" value="{{ old('tempat_lahir', $penduduk->tempat_lahir) }}" required>
+                                </div>
+                                @error('tempat_lahir_type')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                                @error('tempat_lahir')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
 
                         <div class="col-md-6">
                             <label for="tanggal_lahir" class="form-label">Tanggal Lahir <span class="text-danger">*</span></label>
@@ -114,6 +124,36 @@
                             <input type="text" class="form-control @error('rw') is-invalid @enderror"
                                    id="rw" name="rw" value="{{ old('rw', $penduduk->rw) }}" maxlength="3" required>
                             @error('rw')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label for="kabupaten_kota" class="form-label">Kabupaten/Kota <span class="text-danger">*</span></label>
+                            <select class="form-select @error('kabupaten_kota') is-invalid @enderror" id="kabupaten_kota" name="kabupaten_kota" required>
+                                <option value="">Pilih Kabupaten/Kota</option>
+                            </select>
+                            @error('kabupaten_kota')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-4">
+                            <label for="kecamatan" class="form-label">Kecamatan <span class="text-danger">*</span></label>
+                            <select class="form-select @error('kecamatan') is-invalid @enderror" id="kecamatan" name="kecamatan" required>
+                                <option value="">Pilih Kecamatan</option>
+                            </select>
+                            @error('kecamatan')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-4">
+                            <label for="kelurahan" class="form-label">Kelurahan <span class="text-danger">*</span></label>
+                            <select class="form-select @error('kelurahan') is-invalid @enderror" id="kelurahan" name="kelurahan" required>
+                                <option value="">Pilih Kelurahan</option>
+                            </select>
+                            @error('kelurahan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
@@ -191,4 +231,99 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+console.log('=== Edit script loaded ===');
+document.addEventListener('DOMContentLoaded', function() {
+    const kabSelect = document.getElementById('kabupaten_kota');
+    const kecSelect = document.getElementById('kecamatan');
+    const kelSelect = document.getElementById('kelurahan');
+    const oldKec = @json(old('kecamatan', $penduduk->kecamatan));
+    const oldKel = @json(old('kelurahan', $penduduk->kelurahan));
+    const OLD_KAB = @json(old('kabupaten_kota', $penduduk->kabupaten_kota));
+
+    const WILAYAH_REGENCIES = '/api/wilayah/regencies/32';
+    const WILAYAH_DISTRICT_URL = id => `/api/wilayah/districts/${id}`;
+    const WILAYAH_VILLAGE_URL = id => `/api/wilayah/villages/${id}`;
+
+    function clearSelect(select, placeholder) {
+        if (!select) return;
+        select.innerHTML = '';
+        const opt = document.createElement('option'); opt.value = ''; opt.textContent = placeholder; select.appendChild(opt);
+    }
+
+    function populate(select, items, selectedValue) {
+        if (!select) return;
+        clearSelect(select, select===kecSelect? 'Pilih Kecamatan' : 'Pilih Kelurahan');
+        items.forEach(item => {
+            const id = item.id ?? item.kode ?? null;
+            const name = item.name ?? item.nama ?? String(item);
+            if (!name) return;
+            const opt = document.createElement('option'); opt.value = name; opt.textContent = name; if (id) opt.dataset.id = id; if (selectedValue && selectedValue==name) opt.selected = true; select.appendChild(opt);
+        });
+    }
+
+    async function fetchWilayahDistrictsByRegencyId(regId, targetSelect, selectedValue) {
+        if (!regId) return clearSelect(targetSelect, 'Pilih Kecamatan');
+        try {
+            const res = await fetch(WILAYAH_DISTRICT_URL(regId));
+            const items = await res.json();
+            let dataArray = items;
+            if (items && !Array.isArray(items)) dataArray = items.data || items.results || [];
+            populate(targetSelect, dataArray, selectedValue);
+        } catch (e) { clearSelect(targetSelect, 'Pilih Kecamatan'); }
+    }
+
+    async function fetchWilayahVillagesByDistrictId(districtId, targetSelect, selectedValue) {
+        if (!districtId) return clearSelect(targetSelect, 'Pilih Kelurahan');
+        try {
+            const res = await fetch(WILAYAH_VILLAGE_URL(districtId));
+            const items = await res.json();
+            let dataArray = items;
+            if (items && !Array.isArray(items)) dataArray = items.data || items.results || [];
+            populate(targetSelect, dataArray, selectedValue);
+        } catch (e) { clearSelect(targetSelect, 'Pilih Kelurahan'); }
+    }
+
+    async function fetchRegenciesForProvince() {
+        try {
+            clearSelect(kabSelect, 'Memuat Kabupaten/Kota...');
+            const res = await fetch(WILAYAH_REGENCIES);
+            const items = await res.json();
+            let dataArray = items;
+            if (items && !Array.isArray(items)) dataArray = items.data || items.results || [];
+            clearSelect(kabSelect, 'Pilih Kabupaten/Kota');
+            dataArray.forEach(it => {
+                const opt = document.createElement('option'); const name = it.name || it.nama || String(it); opt.value = name; opt.textContent = name; if (it.id) opt.dataset.id = it.id; if (OLD_KAB && OLD_KAB==name) opt.selected = true; kabSelect.appendChild(opt);
+            });
+            if (OLD_KAB && !Array.from(kabSelect.options).some(o=>o.selected)) { const opt = document.createElement('option'); opt.value=OLD_KAB; opt.textContent=OLD_KAB; opt.selected=true; kabSelect.appendChild(opt); }
+            if (kabSelect.value) kabSelect.dispatchEvent(new Event('change'));
+        } catch (e) { clearSelect(kabSelect, 'Pilih Kabupaten/Kota'); }
+    }
+
+    kabSelect && kabSelect.addEventListener('change', function() {
+        const selectedOpt = kabSelect.options[kabSelect.selectedIndex];
+        const regId = selectedOpt ? selectedOpt.dataset.id : null;
+        clearSelect(kecSelect, 'Memuat kecamatan...'); clearSelect(kelSelect, 'Pilih Kelurahan');
+        if (regId) fetchWilayahDistrictsByRegencyId(regId, kecSelect, oldKec);
+    });
+
+    kecSelect && kecSelect.addEventListener('change', function() {
+        const selectedOpt = kecSelect.options[kecSelect.selectedIndex];
+        const districtId = selectedOpt ? selectedOpt.dataset.id : null;
+        clearSelect(kelSelect, 'Memuat kelurahan...');
+        fetchWilayahVillagesByDistrictId(districtId, kelSelect, oldKel);
+    });
+
+    fetchRegenciesForProvince();
+
+    // enforce numeric nik
+    const nikInput = document.getElementById('nik');
+    if (nikInput) {
+        nikInput.addEventListener('input', function() { this.value = this.value.replace(/\D+/g, ''); });
+    }
+});
+</script>
 @endsection

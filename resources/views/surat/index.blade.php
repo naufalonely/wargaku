@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Data Surat Pengantar</h1>
+    <h1 class="h2">Data Surat</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <a href="{{ route('surat.create') }}" class="btn btn-primary">
             <i class="fas fa-plus me-1"></i> Buat Surat Baru
@@ -63,6 +63,7 @@
                                 <a href="{{ route('surat.edit', $surat) }}" class="btn btn-warning">
                                     <i class="fas fa-edit"></i>
                                 </a>
+                                @if(auth('pegawai')->check() && auth('pegawai')->user()->level === 'admin')
                                 <form method="POST" action="{{ route('surat.destroy', $surat) }}"
                                       onsubmit="return confirm('Yakin ingin menghapus data ini?')" style="display: inline;">
                                     @csrf
@@ -71,6 +72,7 @@
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </form>
+                                @endif
                             </div>
                         </td>
                     </tr>

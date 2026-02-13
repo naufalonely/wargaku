@@ -29,9 +29,6 @@ class SuratSeeder extends Seeder
         }
 
         $jenisSuratOptions = [
-            'Kartu Keluarga',
-            'Kartu Tanda Penduduk',
-            'Kartu Identitas Anak',
             'Surat Keterangan Pindah',
             'Surat Keterangan Pindah Luar Negeri',
             'Surat Keterangan Tempat Tinggal',
@@ -42,12 +39,6 @@ class SuratSeeder extends Seeder
             'Surat Keterangan Pelepasan Kewarganegaraan Indonesia',
             'Surat Keterangan Pengganti Tanda Identitas',
             'Surat Keterangan Pencatatan Sipil',
-            'Akta Kelahiran',
-            'Akta Kematian',
-            'Akta Perkawinan',
-            'Akta Perceraian',
-            'Akta Pengakuan Anak',
-            'Akta Pengesahan Anak',
         ];
 
         $statusOptions = ['Draft', 'Diterbitkan', 'Dibatalkan'];

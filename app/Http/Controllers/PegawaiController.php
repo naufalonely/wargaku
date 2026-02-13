@@ -7,6 +7,10 @@ use App\Models\Pegawai;
 
 class PegawaiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(\App\Http\Middleware\IsAdmin::class)->only(['create', 'store', 'edit', 'update', 'destroy']);
+    }
     public function index(Request $request)
     {
         $query = Pegawai::query();
@@ -36,6 +40,7 @@ class PegawaiController extends Controller
             'password' => 'required|string|min:6|confirmed',
             'jabatan' => 'required|string|max:255',
             'level' => 'required|in:admin,staff',
+            'is_active' => 'boolean',
         ]);
 
         Pegawai::create([
@@ -45,6 +50,7 @@ class PegawaiController extends Controller
             'password' => Hash::make($request->password),
             'jabatan' => $request->jabatan,
             'level' => $request->level,
+            'is_active' => $request->is_active ?? true,
         ]);
 
         return redirect()->route('pegawai.index')->with('success', 'Data pegawai berhasil ditambahkan!');
@@ -68,9 +74,11 @@ class PegawaiController extends Controller
             'email' => 'required|string|email|max:255|unique:pegawais,email,' . $pegawai->id,
             'jabatan' => 'required|string|max:255',
             'level' => 'required|in:admin,staff',
+            'is_active' => 'boolean',
         ]);
 
         $data = $request->only(['nip', 'nama', 'email', 'jabatan', 'level']);
+        $data['is_active'] = $request->is_active ?? true;
 
         if ($request->filled('password')) {
             $request->validate(['password' => 'min:6|confirmed']);

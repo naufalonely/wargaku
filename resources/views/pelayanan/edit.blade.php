@@ -20,54 +20,51 @@
                     @csrf
                     @method('PUT')
 
-                    <div class="mb-3">
-                        <label for="nomor_permohonan" class="form-label">Nomor Permohonan</label>
-                        <input type="text" class="form-control" id="nomor_permohonan" value="{{ $pelayanan->nomor_permohonan }}" readonly>
-                        <div class="form-text">Nomor permohonan tidak dapat diubah</div>
-                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="nomor_permohonan" class="form-label">Nomor Permohonan</label>
+                            <input type="text" class="form-control" id="nomor_permohonan" value="{{ $pelayanan->nomor_permohonan }}" readonly>
+                            <div class="form-text">Nomor permohonan tidak dapat diubah</div>
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="penduduk_id" class="form-label">Nama Pemohon <span class="text-danger">*</span></label>
-                        <select class="form-select @error('penduduk_id') is-invalid @enderror" id="penduduk_id" name="penduduk_id" required>
-                            <option value="">Pilih Pemohon</option>
-                            @foreach($penduduks as $penduduk)
-                                <option value="{{ $penduduk->id }}" {{ old('penduduk_id', $pelayanan->penduduk_id) == $penduduk->id ? 'selected' : '' }}>
-                                    {{ $penduduk->nama }} ({{ $penduduk->nik }})
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('penduduk_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="jenis_pelayanan" class="form-label">Jenis Pelayanan <span class="text-danger">*</span></label>
-                        <select class="form-select @error('jenis_pelayanan') is-invalid @enderror" id="jenis_pelayanan" name="jenis_pelayanan" required>
-                            <option value="">Pilih Jenis Pelayanan</option>
-                            <option value="Pendaftaran Kelahiran" {{ old('jenis_pelayanan', $pelayanan->jenis_pelayanan) == 'Pendaftaran Kelahiran' ? 'selected' : '' }}>Pendaftaran Kelahiran</option>
-                            <option value="Pendaftaran Kematian" {{ old('jenis_pelayanan', $pelayanan->jenis_pelayanan) == 'Pendaftaran Kematian' ? 'selected' : '' }}>Pendaftaran Kematian</option>
-                            <option value="Pindah Datang" {{ old('jenis_pelayanan', $pelayanan->jenis_pelayanan) == 'Pindah Datang' ? 'selected' : '' }}>Pindah Datang</option>
-                            <option value="Pindah Keluar" {{ old('jenis_pelayanan', $pelayanan->jenis_pelayanan) == 'Pindah Keluar' ? 'selected' : '' }}>Pindah Keluar</option>
-                            <option value="Penerbitan KTP" {{ old('jenis_pelayanan', $pelayanan->jenis_pelayanan) == 'Penerbitan KTP' ? 'selected' : '' }}>Penerbitan KTP</option>
-                            <option value="Penerbitan KK" {{ old('jenis_pelayanan', $pelayanan->jenis_pelayanan) == 'Penerbitan KK' ? 'selected' : '' }}>Penerbitan KK</option>
-                            <option value="Perubahan Data" {{ old('jenis_pelayanan', $pelayanan->jenis_pelayanan) == 'Perubahan Data' ? 'selected' : '' }}>Perubahan Data</option>
-                        </select>
-                        @error('jenis_pelayanan')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="keterangan" class="form-label">Keterangan <span class="text-danger">*</span></label>
-                        <textarea class="form-control @error('keterangan') is-invalid @enderror"
-                                  id="keterangan" name="keterangan" rows="4" required>{{ old('keterangan', $pelayanan->keterangan) }}</textarea>
-                        @error('keterangan')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                        <div class="col-md-6"></div>
                     </div>
 
                     <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label for="penduduk_id" class="form-label">Nama Pemohon <span class="text-danger">*</span></label>
+                            <select class="form-select @error('penduduk_id') is-invalid @enderror" id="penduduk_id" name="penduduk_id" required>
+                                <option value="">Pilih Pemohon</option>
+                                @foreach($penduduks as $penduduk)
+                                    <option value="{{ $penduduk->id }}" {{ old('penduduk_id', $pelayanan->penduduk_id) == $penduduk->id ? 'selected' : '' }}>
+                                        {{ $penduduk->nama }} ({{ $penduduk->nik }})
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('penduduk_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="jenis_pelayanan" class="form-label">Jenis Pelayanan <span class="text-danger">*</span></label>
+                            <select class="form-select @error('jenis_pelayanan') is-invalid @enderror" id="jenis_pelayanan" name="jenis_pelayanan" required>
+                                <option value="">Pilih Jenis Pelayanan</option>
+                                <option value="Pendaftaran Kelahiran" {{ old('jenis_pelayanan', $pelayanan->jenis_pelayanan) == 'Pendaftaran Kelahiran' ? 'selected' : '' }}>Pendaftaran Kelahiran</option>
+                                <option value="Pendaftaran Kematian" {{ old('jenis_pelayanan', $pelayanan->jenis_pelayanan) == 'Pendaftaran Kematian' ? 'selected' : '' }}>Pendaftaran Kematian</option>
+                                <option value="Pindah Datang" {{ old('jenis_pelayanan', $pelayanan->jenis_pelayanan) == 'Pindah Datang' ? 'selected' : '' }}>Pindah Datang</option>
+                                <option value="Pindah Keluar" {{ old('jenis_pelayanan', $pelayanan->jenis_pelayanan) == 'Pindah Keluar' ? 'selected' : '' }}>Pindah Keluar</option>
+                                <option value="Penerbitan KTP" {{ old('jenis_pelayanan', $pelayanan->jenis_pelayanan) == 'Penerbitan KTP' ? 'selected' : '' }}>Penerbitan KTP</option>
+                                <option value="Penerbitan KK" {{ old('jenis_pelayanan', $pelayanan->jenis_pelayanan) == 'Penerbitan KK' ? 'selected' : '' }}>Penerbitan KK</option>
+                                <option value="Perubahan Data" {{ old('jenis_pelayanan', $pelayanan->jenis_pelayanan) == 'Perubahan Data' ? 'selected' : '' }}>Perubahan Data</option>
+                            </select>
+                            @error('jenis_pelayanan')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                         <div class="col-md-6">
                             <label for="tanggal_permohonan" class="form-label">Tanggal Permohonan <span class="text-danger">*</span></label>
                             <input type="date" class="form-control @error('tanggal_permohonan') is-invalid @enderror"
@@ -76,8 +73,21 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                    </div>
 
-                        <div class="col-md-6">
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label for="keterangan" class="form-label">Keterangan <span class="text-danger">*</span></label>
+                            <textarea class="form-control @error('keterangan') is-invalid @enderror"
+                                      id="keterangan" name="keterangan" rows="4" required>{{ old('keterangan', $pelayanan->keterangan) }}</textarea>
+                            @error('keterangan')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-12">
                             <label for="status" class="form-label">Status <span class="text-danger">*</span></label>
                             <select class="form-select @error('status') is-invalid @enderror" id="status" name="status" required>
                                 <option value="">Pilih Status</option>
@@ -92,11 +102,12 @@
                         </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="catatan" class="form-label">Catatan</label>
-                        <textarea class="form-control @error('catatan') is-invalid @enderror"
-                                  id="catatan" name="catatan" rows="3" placeholder="Tambahkan catatan jika diperlukan...">{{ old('catatan', $pelayanan->catatan) }}</textarea>
-                        <div class="form-text">Catatan akan ditampilkan kepada pemohon</div>
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label for="catatan" class="form-label">Catatan</label>
+                            <textarea class="form-control @error('catatan') is-invalid @enderror"
+                                      id="catatan" name="catatan" rows="3" placeholder="Tambahkan catatan jika diperlukan...">{{ old('catatan', $pelayanan->catatan) }}</textarea>
+                            <div class="form-text">Catatan akan ditampilkan kepada pemohon</div>
                         @error('catatan')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -132,11 +143,11 @@
                 <table class="table table-borderless table-sm mb-0">
                     <tr>
                         <th>Dibuat</th>
-                        <td>{{ $pelayanan->created_at->format('d F Y H:i') }}</td>
+                        <td>{{ $pelayanan->created_at->locale('id')->translatedFormat('d F Y H:i') }}</td>
                     </tr>
                     <tr>
                         <th>Diperbarui</th>
-                        <td>{{ $pelayanan->updated_at->format('d F Y H:i') }}</td>
+                        <td>{{ $pelayanan->updated_at->locale('id')->translatedFormat('d F Y H:i') }}</td>
                     </tr>
                     <tr>
                         <th>Petugas</th>

@@ -38,11 +38,11 @@
                             </tr>
                             <tr>
                                 <th>Tempat Lahir</th>
-                                <td>{{ $penduduk->tempat_lahir }}</td>
+                                <td>{{ ($penduduk->tempat_lahir_type ? $penduduk->tempat_lahir_type . ' ' : '') . $penduduk->tempat_lahir }}</td>
                             </tr>
                             <tr>
                                 <th>Tanggal Lahir</th>
-                                <td>{{ $penduduk->tanggal_lahir->format('d F Y') }}</td>
+                                <td>{{ $penduduk->tanggal_lahir->locale('id')->translatedFormat('d F Y') }}</td>
                             </tr>
                             <tr>
                                 <th>Umur</th>
@@ -86,11 +86,11 @@
                             </tr>
                             <tr>
                                 <th>Data Dibuat</th>
-                                <td>{{ $penduduk->created_at->format('d F Y H:i') }}</td>
+                                <td>{{ $penduduk->created_at->locale('id')->translatedFormat('d F Y H:i') }}</td>
                             </tr>
                             <tr>
                                 <th>Terakhir Update</th>
-                                <td>{{ $penduduk->updated_at->format('d F Y H:i') }}</td>
+                                <td>{{ $penduduk->updated_at->locale('id')->translatedFormat('d F Y H:i') }}</td>
                             </tr>
                         </table>
                     </div>
@@ -117,6 +117,11 @@
                     <div class="col-6">
                         <p class="mb-1"><strong>RW:</strong> {{ $penduduk->rw }}</p>
                     </div>
+                        <div>
+                            <p class="mb-1"><strong>Kabupaten/Kota:</strong> {{ $penduduk->kabupaten_kota }}</p>
+                            <p class="mb-1"><strong>Kecamatan:</strong> {{ $penduduk->kecamatan ?: '-' }}</p>
+                            <p class="mb-1"><strong>Kelurahan:</strong> {{ $penduduk->kelurahan ?: '-' }}</p>
+                        </div>
                 </div>
             </div>
         </div>
@@ -134,7 +139,7 @@
                     <div class="d-flex justify-content-between align-items-center mb-2">
                         <div>
                             <small class="fw-bold">{{ $surat->jenis_surat }}</small><br>
-                            <small class="text-muted">{{ $surat->created_at->format('d M Y') }}</small>
+                            <small class="text-muted">{{ $surat->created_at->locale('id')->translatedFormat('d M Y') }}</small>
                         </div>
                         <span class="badge bg-{{ $surat->status == 'Diterbitkan' ? 'success' : 'warning' }}">
                             {{ $surat->status }}

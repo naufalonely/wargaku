@@ -34,8 +34,9 @@ class PendudukController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nik' => 'required|string|size:16|unique:penduduks',
+            'nik' => 'required|digits:16|unique:penduduks',
             'nama' => 'required|string|max:255',
+            'tempat_lahir_type' => 'required|in:Kota,Kabupaten',
             'tempat_lahir' => 'required|string|max:255',
             'tanggal_lahir' => 'required|date',
             'jenis_kelamin' => 'required|in:L,P',
@@ -47,9 +48,23 @@ class PendudukController extends Controller
             'pekerjaan' => 'required|string|max:255',
             'kewarganegaraan' => 'required|string|max:255',
             'no_telepon' => 'nullable|string|max:15',
+            'kabupaten_kota' => 'required|string',
+            'kecamatan' => 'nullable|string',
+            'kelurahan' => 'nullable|string',
         ]);
 
-        Penduduk::create($request->all());
+        $data = $request->only([
+            'nik','nama','tempat_lahir_type','tempat_lahir','tanggal_lahir','jenis_kelamin',
+            'alamat','rt','rw','agama','status_perkawinan','pekerjaan','kewarganegaraan',
+            'no_telepon','kabupaten_kota','kecamatan','kelurahan','status'
+        ]);
+
+        // ensure NIK stored as digits only
+        $data['nik'] = preg_replace('/\D+/', '', $data['nik']);
+
+        if (empty($data['status'])) $data['status'] = 'Aktif';
+
+        Penduduk::create($data);
 
         return redirect()->route('penduduk.index')->with('success', 'Data penduduk berhasil ditambahkan!');
     }
@@ -67,8 +82,9 @@ class PendudukController extends Controller
     public function update(Request $request, Penduduk $penduduk)
     {
         $request->validate([
-            'nik' => 'required|string|size:16|unique:penduduks,nik,' . $penduduk->id,
+            'nik' => 'required|digits:16|unique:penduduks,nik,' . $penduduk->id,
             'nama' => 'required|string|max:255',
+            'tempat_lahir_type' => 'required|in:Kota,Kabupaten',
             'tempat_lahir' => 'required|string|max:255',
             'tanggal_lahir' => 'required|date',
             'jenis_kelamin' => 'required|in:L,P',
@@ -81,9 +97,19 @@ class PendudukController extends Controller
             'kewarganegaraan' => 'required|string|max:255',
             'no_telepon' => 'nullable|string|max:15',
             'status' => 'required|in:Aktif,Pindah,Meninggal',
+            'kabupaten_kota' => 'required|string',
+            'kecamatan' => 'nullable|string',
+            'kelurahan' => 'nullable|string',
         ]);
 
-        $penduduk->update($request->all());
+        $data = $request->only([
+            'nik','nama','tempat_lahir_type','tempat_lahir','tanggal_lahir','jenis_kelamin',
+            'alamat','rt','rw','agama','status_perkawinan','pekerjaan','kewarganegaraan',
+            'no_telepon','kabupaten_kota','kecamatan','kelurahan','status'
+        ]);
+        $data['nik'] = preg_replace('/\D+/', '', $data['nik']);
+
+        $penduduk->update($data);
 
         return redirect()->route('penduduk.index')->with('success', 'Data penduduk berhasil diperbarui!');
     }
@@ -92,5 +118,18 @@ class PendudukController extends Controller
     {
         $penduduk->delete();
         return redirect()->route('penduduk.index')->with('success', 'Data penduduk berhasil dihapus!');
+    }
+
+    // AJAX search for penduduk by name or NIK
+    public function search(Request $request)
+    {
+        $q = $request->get('q', '');
+
+        $results = Penduduk::where('nama', 'like', "%{$q}%")
+            ->orWhere('nik', 'like', "%{$q}%")
+            ->limit(10)
+            ->get(['id', 'nama', 'nik', 'tanggal_lahir']);
+
+        return response()->json($results);
     }
 }

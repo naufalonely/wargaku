@@ -38,7 +38,7 @@
                             </tr>
                             <tr>
                                 <th>Tanggal Permohonan</th>
-                                <td>{{ $pelayanan->tanggal_permohonan->format('d F Y') }}</td>
+                                <td>{{ $pelayanan->tanggal_permohonan->locale('id')->translatedFormat('d F Y') }}</td>
                             </tr>
                             <tr>
                                 <th>Status</th>
@@ -66,11 +66,11 @@
                             </tr>
                             <tr>
                                 <th>Dibuat</th>
-                                <td>{{ $pelayanan->created_at->format('d F Y H:i') }}</td>
+                                <td>{{ $pelayanan->created_at->locale('id')->translatedFormat('d F Y H:i') }}</td>
                             </tr>
                             <tr>
                                 <th>Diperbarui</th>
-                                <td>{{ $pelayanan->updated_at->format('d F Y H:i') }}</td>
+                                <td>{{ $pelayanan->updated_at->locale('id')->translatedFormat('d F Y H:i') }}</td>
                             </tr>
                         </table>
                     </div>
@@ -160,7 +160,7 @@
                         <div class="timeline-marker bg-primary"></div>
                         <div class="timeline-content">
                             <h6 class="mb-1">Diajukan</h6>
-                            <small class="text-muted">{{ $pelayanan->created_at->format('d M Y H:i') }}</small>
+                            <small class="text-muted">{{ $pelayanan->created_at->locale('id')->translatedFormat('d M Y H:i') }}</small>
                         </div>
                     </div>
 
@@ -170,7 +170,7 @@
                             <h6 class="mb-1">Diproses</h6>
                             <small class="text-muted">
                                 @if(in_array($pelayanan->status, ['Diproses', 'Selesai', 'Ditolak']))
-                                    {{ $pelayanan->updated_at->format('d M Y H:i') }}
+                                    {{ $pelayanan->updated_at->locale('id')->translatedFormat('d M Y H:i') }}
                                 @else
                                     Menunggu
                                 @endif
@@ -186,7 +186,7 @@
                             </h6>
                             <small class="text-muted">
                                 @if(in_array($pelayanan->status, ['Selesai', 'Ditolak']))
-                                    {{ $pelayanan->updated_at->format('d M Y H:i') }}
+                                    {{ $pelayanan->updated_at->locale('id')->translatedFormat('d M Y H:i') }}
                                 @else
                                     Menunggu
                                 @endif

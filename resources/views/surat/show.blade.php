@@ -48,9 +48,9 @@
                             <td>{{ $surat->penduduk->nik }}</td>
                         </tr>
                         <tr>
-                            <td>Tempat, Tgl Lahir</td>
+                            <td>Tempat/Tanggal Lahir</td>
                             <td>:</td>
-                            <td>{{ $surat->penduduk->tempat_lahir }}, {{ $surat->penduduk->tanggal_lahir->format('d F Y') }}</td>
+                            <td>{{ $surat->penduduk->tempat_lahir }}, {{ $surat->penduduk->tanggal_lahir->locale('id')->translatedFormat('d F Y') }}</td>
                         </tr>
                         <tr>
                             <td>Jenis Kelamin</td>
@@ -80,11 +80,11 @@
                 <div class="row mt-5">
                     <div class="col-6"></div>
                     <div class="col-6 text-center">
-                        <p>Bandung, {{ $surat->tanggal_surat->format('d F Y') }}</p>
+                        <p>Bandung, {{ $surat->tanggal_surat->locale('id')->translatedFormat('d F Y') }}</p>
                         <p>KEPALA DINAS KEPENDUDUKAN DAN PENCATATAN SIPIL PROVINSI JAWA BARAT.</p>
                         <br><br><br>
-                        <p><u>{{ $surat->pegawai->nama }}</u></p>
-                        <p>{{ $surat->pegawai->jabatan }}</p>
+                        <p><u>{{ "dr. Berli Hamdani Gelung Sakti, MPPM." }}</u></p>
+                        <p>{{ "NIP. 196610201998031003" }}</p>
                     </div>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                     </tr>
                     <tr>
                         <th>Tanggal dibuat</th>
-                        <td>{{ $surat->created_at->format('d F Y H:i') }}</td>
+                        <td>{{ $surat->created_at->locale('id')->translatedFormat('d F Y H:i') }}</td>
                     </tr>
                 </table>
             </div>
